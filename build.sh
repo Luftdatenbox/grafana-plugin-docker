@@ -4,7 +4,8 @@
 
 _grafana_tag=$1
 _grafana_version=${_grafana_tag:1}
-_grafana_architecture="arm32v7"
+_grafana_repository=$2
+source buildConfig.sh
 
 mkdir -p $_grafana_architecture/plugins
 cat plugin_panel.conf | while read key value; do
@@ -33,17 +34,17 @@ if [ "$_grafana_version" != "" ]; then
 	echo "Building version ${_grafana_version} ${_grafana_architecture}"
 	cd $_grafana_architecture
 	docker build \
-		--tag "${USER}/grafana_plugin:${_grafana_version}" \
+		--tag "${USER}/grafana-plugin:${_grafana_version}" \
 		--no-cache=true .
-	docker tag $USER/grafana_plugin:${_grafana_version} $USER/grafana_plugin:latest
+	docker tag $_grafana_repository/grafana-plugin:${_grafana_version} $_grafana_repository/grafana-plugin:latest
 
 else
 	echo "Building latest ${_grafana_architecture}"
 	cd $_grafana_architecture
 	docker build \
-		--tag $USER"/grafana_plugin:master" \
+		--tag $_grafana_repository"/grafana-plugin:master" \
 		--no-cache=true .
-	docker tag $USER/grafana_plugin:master $USER/grafana_plugin:latest
+	docker tag $_grafana_repository/grafana-plugin:master $_grafana_repository/grafana-plugin:latest
 fi
 
 cd ..
