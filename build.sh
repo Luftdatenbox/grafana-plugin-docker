@@ -14,7 +14,7 @@ cat plugin_panel.conf | while read key value; do
 		if [ "$key" == "tkuri-grafana-track-map" ];
 		then
 			wget https://github.com/tkurki/grafana-track-map/archive/master.zip -O $_grafana_architecture/plugins/$key
-			unzip -qq plugins/$key -d $_grafana_architecture/plugins
+			unzip -qq $_grafana_architecture/plugins/$key -d $_grafana_architecture/plugins
 			rm $_grafana_architecture/plugins/$key
 		else
 			echo "download $key version $value"
