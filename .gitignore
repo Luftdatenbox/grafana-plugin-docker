@@ -3,3 +3,4 @@ amd64/plugins
 adm64/install_tkuri-grafana-track-map.sh
 arm32v7/plugins
 arm32v7/install_tkuri-grafana-track-map.sh
+buildConfig.sh
