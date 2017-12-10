@@ -8,6 +8,8 @@ x86_64:
 rpi:
 	echo '#!/usr/bin/env bash \n _grafana_architecture="arm32v7"' | tee buildConfig.sh
 
-build_grafana_plugin:
+build: x86_64
 	./build.sh "" ${REPOSITORY}
 
+build_rpi: rpi
+	./build.sh "" ${REPOSITORY}
